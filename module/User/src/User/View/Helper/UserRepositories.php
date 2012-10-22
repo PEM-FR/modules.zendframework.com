@@ -34,24 +34,23 @@ class UserRepositories extends AbstractHelper implements ServiceManagerAwareInte
         $sm = $sm->getServiceLocator();
         $api = $sm->get('edpgithub_api_factory');
 
-        $repoList = array();
         $service = $api->getService('Repo');
-        $memberRepositories = $service->listRepositories(null, 'member');
-       
-        foreach($memberRepositories as $repo) {
-            $repoList[$repo->getName()] = $repo;
-        }
+        $mapper = $sm->get('application_module_mapper');
 
-        $allRepositories = $service->listRepositories(null, 'all');
-       
-        foreach($allRepositories as $repo) {
+        $repositories = $service->listRepositories(null, 'all');
+
+        foreach($repositories as $key => $repo) {
             if(!$repo->getFork()) {
-                $repoList[$repo->getName()] = $repo;
+                $module = $mapper->findByName($repo->getName());
+                if($module) {
+                    unset($repositories[$key]);
+                }
+            } else {
+                unset($repositories[$key]);
             }
         }
-        
-        return array('repositories' => $repoList, 'api' => $api);
 
+        return $repositories;
     }    
 
     /**
