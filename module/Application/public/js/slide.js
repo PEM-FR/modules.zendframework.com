@@ -12,8 +12,9 @@ $(document).ready(function() {
 	});		
 	
 	// Switch buttons from "Log In | Register" to "Close Panel" on click
-	$("#toggle a").click(function () {
-		$("#toggle a").toggle();
+	$("#toggleHeader").click(function () {
+		$("#header-intro").toggle("fast");
+		$("#toggleHeader").toggleClass("closed");
 	});		
 		
 });

@@ -1,6 +1,6 @@
 <div class="container-fluid landing-intro">
   <div class="container">
-    <div class="row">
+    <div id="header-intro" class="row">
       <div class="span8">
         <h1 class="zf-green">
           Welcome to the ZF2 Modules Site
@@ -15,11 +15,11 @@
         <blockquote>
           <p>
             <em>
-              Hell, we might even throw in something cheesy like a hipster quote.
+              Hell, we might even throw in something cheesy like a hipster quote or #protips.
             </em>
           </p>
           <small>
-            Someone idiot 
+            Someone idiot
             <cite title="Source Title">
               Hipster
             </cite>
@@ -28,9 +28,13 @@
       </p>
     </div>
     <div class="span4">
-      
       <img class="attentionimage pull-right" src="img/rsz_logo.png" />
     </div>
+  </div>
+  <div id="toggleHeader">
+    <img id="closedLogo" class="attentionimage" src="img/zend-logo_small.png" />
+    <p class="toggledTitle">Modules</p>
+    <p class="pull-right">Toggle this header...</p>
   </div>
 </div>
 </div>
@@ -65,7 +69,7 @@
                             <div class="span10">
                                 <strong><?=$module->getOwner()?></strong>
                                 <p>
-                                    <span class="author-label">Github:</span> 
+                                    <span class="author-label">Github:</span>
                                     <a href="<?=$module->getUrl()?>"><?=$module->getName()?></a><br />
                                     <!--
                                     <span class="author-label">Blog:</span> <a>placeholder</a><br />
@@ -121,8 +125,8 @@
             <hr/>
           </div>
         </div>
-        <?php 
-          $modules = $this->newModules(); 
+        <?php
+          $modules = $this->newModules();
           foreach($modules as $module) {
         ?>
         <div class="row-fluid">
@@ -147,8 +151,8 @@
             <hr/>
           </div>
         </div>
-        <?php 
-          $users = $this->newUsers(); 
+        <?php
+          $users = $this->newUsers();
           foreach($users as $user) {
         ?>
         <div class="row-fluid">

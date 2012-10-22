@@ -45,11 +45,13 @@ div.container a.brand {
     padding: 5px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     margin-top: -20px;
-    padding-top: 75px;
+/*    padding-top: 75px;*/
+	padding-top : 60px;
 }
 
 .attentionimage {
     height: 238px;
+/*	height: 157px;*/
 }
 
 .main-content {
@@ -132,4 +134,8 @@ div.container a.brand {
 
 .sidebar hr {
     margin:5px 0 5px 0;
+}
+
+.container-fluid.landing-intro .container .row .span4 {
+	width : 250px;
 }

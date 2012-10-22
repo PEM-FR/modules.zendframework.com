@@ -287,3 +287,42 @@ Version: 1.0
 	height: 24px;
 	margin-right: 5px;
 }
+
+#toggleHeader, #toggleHeader.closed {
+	cursor: pointer;
+}
+
+#toggleHeader.closed {
+	margin-bottom:0px;
+	margin-top: -25px;
+}
+
+#toggleHeader img, #toggleHeader p.toggledTitle {
+	display: none;
+}
+
+#toggleHeader.closed img {
+	display: inline-block;
+	height: 68px;
+}
+
+#toggleHeader.closed p.toggledTitle {
+	display: inline-block;
+	font-size: 4em;
+	vertical-align: sub;
+	padding: 0;
+	margin: 0;
+	color : #68B604;
+	font-style: italic;
+}
+
+#toggleHeader p {
+	text-align: right;
+	margin-right: 160px;
+}
+
+#toggleHeader.closed p {
+	text-align: right;
+	margin-right: 160px;
+	margin-top: 30px;
+}
