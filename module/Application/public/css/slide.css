@@ -297,7 +297,7 @@ Version: 1.0
 	margin-top: -25px;
 }
 
-#toggleHeader img, #toggleHeader p.toggledTitle {
+#toggleHeader img, #toggleHeader p.toggledTitle, #toggleHeader form.toggledSearch {
 	display: none;
 }
 
@@ -308,7 +308,7 @@ Version: 1.0
 
 #toggleHeader.closed p.toggledTitle {
 	display: inline-block;
-	font-size: 4em;
+	font-size: 3em;
 	vertical-align: sub;
 	padding: 0;
 	margin: 0;
@@ -317,13 +317,18 @@ Version: 1.0
 	font-style: italic;
 }
 
-#toggleHeader p {
+#toggleHeader p.pull-right {
 	text-align: right;
-	margin-right: 160px;
+	margin-right: 5px;
 }
 
-#toggleHeader.closed p {
+#toggleHeader.closed p.pull-right {
 	text-align: right;
-	margin-right: 160px;
+	margin-right: 5px;
 	margin-top: 30px;
+}
+
+#toggleHeader.closed form.toggledSearch {
+	display: inline-block;
+	margin-left: 5%;
 }
