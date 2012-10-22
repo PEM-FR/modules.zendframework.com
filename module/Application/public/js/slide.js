@@ -15,6 +15,14 @@ $(document).ready(function() {
 	$("#toggleHeader").click(function () {
 		$("#header-intro").toggle("fast");
 		$("#toggleHeader").toggleClass("closed");
+		var iconNode = $("#toggleHeader i.icon-upload");
+		if(iconNode.hasClass("icon-upload")){
+			iconNode.removeClass("icon-upload");
+			iconNode.addClass("icon-download");
+		}else{
+			iconNode.removeClass("icon-download");
+			iconNode.addClass("icon-upload");
+		}
 	});		
 		
 });
