@@ -332,3 +332,8 @@ Version: 1.0
 	display: inline-block;
 	margin-left: 5%;
 }
+
+.tab ul.login li i.icon-white {
+	margin-right: 3px;
+	margin-bottom: 3px;
+}
