@@ -28,13 +28,13 @@ class ListModules extends AbstractHelper implements ServiceManagerAwareInterface
      */
     public function __invoke($options = null)
     {
-        $sm = $this->getServiceManager();
-
         //need to fetch top lvl ServiceManager
-        $sm = $sm->getServiceLocator();
+        $sm = $this->getServiceManager()->getServiceLocator();
+
         $mapper = $sm->get('application_module_mapper');
 
         $user = isset($options['user'])? $options['user']:false;
+        $sort = isset($options['sort'])? $options['sort']:false;
 
         //limit modules to only user modules
         if($user) {
@@ -54,8 +54,34 @@ class ListModules extends AbstractHelper implements ServiceManagerAwareInterface
             $mapper = $sm->get('application_module_mapper');
             $modules = $mapper->findAll($limit, 'created_at');
 
-
         }
+
+        if ($sort) {
+            $modules = $this->sortModules($modules, $sm);
+        }
+
+        return $modules;
+    }
+
+    protected function sortModules($unsorted, $sm)
+    {
+        $modules = array(
+            'owned' => array(),
+            'collaborations' => array(),
+//            'forks' => array(),
+//            'submitted' => array(),
+        );
+
+        foreach ($unsorted as $module) {
+            $owner = $module->getOwner();
+            $user = $sm->get('zfcuser_user_service')->getAuthService()->getIdentity();
+            if ($owner == $user->getUsername()) {
+                $modules['owned'][] = $module;
+            } else {
+                $modules['collaborations'][] = $module;
+            }
+        }
+
         return $modules;
     }
 

@@ -129,6 +129,7 @@ return array(
         'invokables' => array(
             'userWidget' => 'Application\View\Helper\UserWidget',
             'listModules' => 'Application\View\Helper\ListModules',
+            'listModuleHtml' => 'Application\View\Helper\ListModuleHtml',
         ),
         'factories' => array( 
           'flashMessenger' => function($sm) { 

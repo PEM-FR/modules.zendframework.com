@@ -2,12 +2,12 @@
 
 namespace User\View\Helper;
 
-use Zend\View\Helper\AbstractHelper;
+use Application\View\Helper\ListModules;
 use Zend\View\Model\ViewModel;
 use Zend\ServiceManager\ServiceManagerAwareInterface;
 use Zend\ServiceManager\ServiceManager;
 
-class UserRepositories extends AbstractHelper implements ServiceManagerAwareInterface
+class UserRepositories extends ListModules implements ServiceManagerAwareInterface
 {
     /**
      * $var string template used for view
@@ -28,14 +28,15 @@ class UserRepositories extends AbstractHelper implements ServiceManagerAwareInte
      */
     public function __invoke($options = array())
     {
-        $sm = $this->getServiceManager();
-
         //need to fetch top lvl ServiceManager
-        $sm = $sm->getServiceLocator();
+        $sm = $this->getServiceManager()->getServiceLocator();
+
         $api = $sm->get('edpgithub_api_factory');
 
         $service = $api->getService('Repo');
         $mapper = $sm->get('application_module_mapper');
+
+        $sort = isset($options['sort'])? $options['sort']:false;
 
         $repositories = $service->listRepositories(null, 'all');
 
@@ -50,8 +51,34 @@ class UserRepositories extends AbstractHelper implements ServiceManagerAwareInte
             }
         }
 
+        if ($sort) {
+            $repositories = $this->sortModules($repositories, $sm);
+        }
+
         return $repositories;
     }    
+
+    protected function sortModules($unsorted, $sm)
+    {
+        $modules = array(
+            'owned' => array(),
+            'collaborations' => array(),
+//            'forks' => array(),
+//            'submitted' => array(),
+        );
+
+        foreach ($unsorted as $module) {
+            $owner = $module->getOwner();
+            $user = $sm->get('zfcuser_user_service')->getAuthService()->getIdentity();
+            if ($owner['login'] == $user->getUsername()) {
+                $modules['owned'][] = $module;
+            } else {
+                $modules['collaborations'][] = $module;
+            }
+        }
+
+        return $modules;
+    }
 
     /**
      * Retrieve service manager instance

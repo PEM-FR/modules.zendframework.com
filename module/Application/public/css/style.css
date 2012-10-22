@@ -139,3 +139,7 @@ div.container a.brand {
 .container-fluid.landing-intro .container .row .span4 {
 	width : 250px;
 }
+
+section.navbar-inner {
+    margin-bottom: 20px;
+}
