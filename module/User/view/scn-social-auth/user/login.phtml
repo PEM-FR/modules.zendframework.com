@@ -1,0 +1,18 @@
+<div class="container main-content">
+    <div class="row">
+        <div class="span8">
+            <?php
+            $socialSignIn = true;
+            foreach ($this->options->getEnabledProviders() as $provider) {
+                if ($socialSignIn) {
+                    echo '<section><header class="navbar-inner">' .
+                        '<h2>Social Sign In</h2></header>';
+                    $socialSignIn = false;
+                }
+                echo '<dd>' . $this->socialSignInButton($provider)
+                    . '</dd></section>';
+            }
+            ?>
+        </div>
+    </div>
+</div>

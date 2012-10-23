@@ -1,61 +1,6 @@
-<div class="container-fluid landing-intro">
-  <div class="container">
-    <div id="header-intro" class="row">
-      <div class="span8">
-        <h1 class="zf-green">
-          Welcome to the ZF2 Modules Site
-          <br />
-          <small>
-            Some awesome sentence about modules
-          </small>
-        </h1>
-        <p>
-         This website is a work-in-progress. In the future you will be able to use this website to browse, search, rate, and comment on all of the great modules the Zend Framework community has to offer.
-          <hr />
-        <blockquote>
-          <p>
-            <em>
-              Hell, we might even throw in something cheesy like a hipster quote.
-            </em>
-          </p>
-          <small>
-            Someone idiot
-            <cite title="Source Title">
-              Hipster
-            </cite>
-          </small>
-        </blockquote>
-    </div>
-    <div class="span4">
-      <img class="attentionimage pull-right" src="img/rsz_logo.png" />
-    </div>
-  </div>
-</div>
-  <div id="toggleHeader">
-    <img id="closedLogo" class="attentionimage" src="img/zend-logo_small.png" />
-    <p class="toggledTitle">Modules</p>
-    <form class="toggledSearch">
-      <input type="text" class="search-query span6" placeholder="Type to start searching...">
-    </form>
-    <p class="pull-right"><i class="icon-upload"></i> Toggle this header...</p>
-  </div>
-</div>
-
-
-
 <div class="container main-content">
   <div class="row">
     <div class="span8">
-      <div class="row-fluid">
-        <div class="span12">
-          <div class="navbar">
-            <div class="navbar-inner">
-              <h1 class="zf-green">Avilable Modules</h1>
-              <p>Select which module you want to Submit for Listing</p>
-            </div>
-          </div>
-        </div>
-      </div>
       <?php
         $flashMessenger = $this->flashMessenger();
         foreach($flashMessenger->getMessages() as $message) {
@@ -79,8 +24,10 @@
     } else {
         foreach($modules as $type => $moduleArray) {
             if (!empty($moduleArray)) {
-                echo '<section class="navbar-inner">' .
-                    '<header><h2>' . $type . '</h2></header>';
+                echo '<section><header class="navbar-inner">' .
+                    '<h2 class="pull-left">' . $type . '</h2>' .
+                    '<i class="icon-minus"></i>' .
+                    '</header><div class="section-list">';
                 foreach($moduleArray as $module) {
                     echo $this->listModuleHtml(
                         array(
@@ -97,7 +44,7 @@
                         )
                     );
                 }
-                echo '</section>';
+                echo '</div></section>';
             }
         }
     }
@@ -172,4 +119,5 @@
       <br/>
     </div>
   </div>
+</div>
 </div>

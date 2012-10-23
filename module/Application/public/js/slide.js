@@ -15,7 +15,7 @@ $(document).ready(function() {
 	$("#toggleHeader").click(function () {
 		$("#header-intro").toggle("fast");
 		$("#toggleHeader").toggleClass("closed");
-		var iconNode = $("#toggleHeader i.icon-upload");
+		var iconNode = $("#toggleHeader i");
 		if(iconNode.hasClass("icon-upload")){
 			iconNode.removeClass("icon-upload");
 			iconNode.addClass("icon-download");
@@ -25,4 +25,17 @@ $(document).ready(function() {
 		}
 	});		
 		
+	// Switch buttons from "Log In | Register" to "Close Panel" on click
+	$("header.navbar-inner").click(function () {
+		$(this.parentNode).find("div.section-list").toggle("fast");
+		var iconNode = $(this.parentNode).find("i");
+		if(iconNode.hasClass("icon-plus")){
+			iconNode.removeClass("icon-plus");
+			iconNode.addClass("icon-minus");
+		}else{
+			iconNode.removeClass("icon-minus");
+			iconNode.addClass("icon-plus");
+		}
+	});		
+	
 });

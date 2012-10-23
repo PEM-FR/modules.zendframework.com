@@ -63,7 +63,7 @@ class UserRepositories extends ListModules implements ServiceManagerAwareInterfa
                 $module = $mapper->findByName($repo->getName());
                 if($module) {
                     unset($repositories[$key]);
-                } 
+                }
             }
         }
 

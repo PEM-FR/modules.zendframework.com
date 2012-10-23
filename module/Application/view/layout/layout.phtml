@@ -19,7 +19,7 @@
     </head>
 
     <body>
-        <a href="https://github.com/zendframework/modules.zendframework.com"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>
+<!--         <a href="https://github.com/zendframework/modules.zendframework.com"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a> -->
         <div id="toppanel">
             <!-- /login -->
             <!-- The tab on top -->
@@ -56,8 +56,53 @@
                     <li class="right">&nbsp;</li>
                 </ul>
             </div> <!-- / top -->
-
         </div>
+
+<div class="container-fluid landing-intro">
+  <div class="container">
+    <div id="header-intro" class="row">
+      <div class="span8">
+        <h1 class="zf-green">
+          Welcome to the ZF2 Modules Site
+          <br />
+          <small>
+            Some awesome sentence about modules
+          </small>
+        </h1>
+        <p>
+         This website is a work-in-progress. In the future you will be able to use this website to browse, search, rate, and comment on all of the great modules the Zend Framework community has to offer.
+          <hr />
+        <blockquote>
+          <p>
+            <em>
+              Hell, we might even throw in something cheesy like a hipster quote.
+            </em>
+          </p>
+          <small>
+            Someone idiot
+            <cite title="Source Title">
+              Hipster
+            </cite>
+          </small>
+        </blockquote>
+    </div>
+    <div class="span4">
+      <img class="attentionimage pull-right" src="<?php echo $this->url('home'); ?>img/rsz_logo.png" />
+    </div>
+  </div>
+</div>
+  <div id="toggleHeader">
+    <img id="closedLogo" class="attentionimage" src="<?php echo $this->url('home'); ?>img/zend-logo_small.png" />
+    <p class="toggledTitle">Modules</p>
+    <form class="toggledSearch">
+      <input type="text" class="search-query span6" placeholder="Type to start searching...">
+    </form>
+    <p class="pull-right"><i class="icon-upload"></i> Toggle this header...</p>
+  </div>
+</div>
+
+
+
 
             <?php echo $this->content; ?>
             <hr style="clear:both" />
