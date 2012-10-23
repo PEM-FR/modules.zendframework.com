@@ -1,9 +1,6 @@
-
-
-
 <div class="container-fluid landing-intro">
   <div class="container">
-    <div class="row">
+    <div id="header-intro" class="row">
       <div class="span8">
         <h1 class="zf-green">
           Welcome to the ZF2 Modules Site
@@ -28,14 +25,20 @@
             </cite>
           </small>
         </blockquote>
-      </p>
     </div>
     <div class="span4">
-
       <img class="attentionimage pull-right" src="img/rsz_logo.png" />
     </div>
   </div>
 </div>
+  <div id="toggleHeader">
+    <img id="closedLogo" class="attentionimage" src="img/zend-logo_small.png" />
+    <p class="toggledTitle">Modules</p>
+    <form class="toggledSearch">
+      <input type="text" class="search-query span6" placeholder="Type to start searching...">
+    </form>
+    <p class="pull-right"><i class="icon-upload"></i> Toggle this header...</p>
+  </div>
 </div>
 
 
@@ -61,68 +64,102 @@
       ?>
 
     <ul class="nav nav-tabs">
-      <li class="active"><a href="#modules" data-toggle="tab">Submitted Modules</a></li>
-      <li><a href="#repositories" data-toggle="tab">My Repositories</a></li>
+      <li class="active"><a href="#submitted" data-toggle="tab">Submitted Modules</a></li>
+      <li><a href="#owned" data-toggle="tab">My Modules</a></li>
+      <li><a href="#collaborations" data-toggle="tab">My Collaborations</a></li>
     </ul>
 
     <div class="tab-content">
-      <div class="tab-pane active" id="modules">
-      <?php
+    <div class="tab-pane active" id="submitted">
+<?php
     $modules = $this->listModules(array('user' => true, 'sort' => true));
     if (empty($modules)) { ?>
     <div class="alert alert-block">No modules was submitted yet</div>
-    <?php }
-    foreach($modules as $type => $moduleArray) {
-      foreach($moduleArray as $module) {
-        echo $this->listModuleHtml(
-          array(
-            'picture' => $module->getPhotoUrl(),
-            'owner' => $module->getOwner(),
-            'url' => $module->getUrl(),
-            'action' => 'module/remove_module',
-            'moduleName' => $module->getName(),
-            'createdAt' => $module->getCreatedAt(),
-            'returnUrl' => $module->getUrl(),
-            'description' => $module->getDescription(),
-            'submitValue' => 'Remove',
-          )
-        );
-      } 
+    <?php
+    } else {
+        foreach($modules as $type => $moduleArray) {
+            if (!empty($moduleArray)) {
+                echo '<section class="navbar-inner">' .
+                    '<header><h2>' . $type . '</h2></header>';
+                foreach($moduleArray as $module) {
+                    echo $this->listModuleHtml(
+                        array(
+                            'picture' => $module->getPhotoUrl(),
+                            'owner' => $module->getOwner(),
+                            'url' => $module->getUrl(),
+                            'action' => $this->url('module/remove_module'),
+                            'moduleName' => $module->getName(),
+                            'createdAt' => $module->getCreatedAt(),
+                            'returnUrl' => $module->getUrl(),
+                            'description' => $module->getDescription(),
+                            'submitValue' => 'Remove',
+                            'submitBtnClass' => 'btn-danger',
+                        )
+                    );
+                }
+                echo '</section>';
+            }
+        }
     }
-  ?>
-
-
-      </div>
-      <div class="tab-pane" id="repositories">
+?>
+  </div>
+  <div class="tab-pane" id="owned">
     <?php
     $repositories = $this->userRepositories(array('sort' => true));
+
     if (empty($repositories)) { ?>
     <div class="alert alert-block">No public and not forked repositories found</div>
-    <?php }
-
-    foreach($repositories as $type => $moduleArray) {
-      echo '<section class="navbar-inner"><h2>' . $type . '</h2>';
-      foreach($moduleArray as $module) {
-        $owner = $module->getOwner();
-        echo $this->listModuleHtml(
-          array(
-            'picture' => $owner['avatar_url'],
-            'owner' => $owner['login'],
-            'url' => $module->getUrl(),
-            'action' => 'module/add_module',
-            'moduleName' => $module->getName(),
-            'createdAt' => $module->getCreatedAt(),
-            'returnUrl' => $module->getHtmlUrl(),
-            'description' => $module->getDescription(),
-            'submitValue' => 'Submit',
-          )
-        );
-    ?>
-<?php }
-  echo '</section>';
-} ?>
-      </div>
-    </div>
+    <?php
+    }else {
+        $owned = $repositories['owned'];
+        foreach($owned as $module) {
+            $owner = $module->getOwner();
+            echo $this->listModuleHtml(
+              array(
+                'picture' => $owner['avatar_url'],
+                'owner' => $owner['login'],
+                'url' => $module->getUrl(),
+                'action' => $this->url('module/add_module'),
+                'moduleName' => $module->getName(),
+                'createdAt' => $module->getCreatedAt(),
+                'returnUrl' => $module->getHtmlUrl(),
+                'description' => $module->getDescription(),
+                'submitValue' => 'Submit',
+                'submitBtnClass' => 'btn-success',
+              )
+            );
+        }
+    }
+?>
+  </div>
+  <div class="tab-pane" id="collaborations">
+    <?php
+    if (empty($repositories)) { ?>
+    <div class="alert alert-block">No public and not forked repositories found</div>
+    <?php
+    } else {
+        $collaborations = $repositories['collaborations'];
+        foreach($collaborations as $module) {
+            $owner = $module->getOwner();
+            echo $this->listModuleHtml(
+                array(
+                    'picture' => $owner['avatar_url'],
+                    'owner' => $owner['login'],
+                    'url' => $module->getUrl(),
+                    'action' => $this->url('module/add_module'),
+                    'moduleName' => $module->getName(),
+                    'createdAt' => $module->getCreatedAt(),
+                    'returnUrl' => $module->getHtmlUrl(),
+                    'description' => $module->getDescription(),
+                    'submitValue' => 'Submit',
+                    'submitBtnClass' => 'btn-success',
+                )
+            );
+        }
+    }
+?>
+  </div>
+</div>
 
 
   </div>

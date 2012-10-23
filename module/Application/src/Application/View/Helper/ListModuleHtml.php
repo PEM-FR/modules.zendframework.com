@@ -55,7 +55,7 @@ class ListModuleHtml extends AbstractHelper implements ServiceManagerAwareInterf
                           <strong>' . $options['moduleName'] . '</strong>
                           <p>
                               <!--<span class="author-label">Version:</span> 1.2.1<br />-->
-                              <span class="author-label">Created:</span>' . 
+                              <span class="author-label">Created:</span>' .
                               ($date->format('Y-m-d')) . '
                               <br />
                               <!--<span class="author-label">Edited:</span> <a>15 days ago</a><br />
@@ -68,9 +68,10 @@ class ListModuleHtml extends AbstractHelper implements ServiceManagerAwareInterf
                       </div>
                       <div class="span1">
                           <br />
-                          <form action="<?php echo $this->url(\'' . $options['action'] . '\')?>" method="post">
+                          <form action="' . $options['action'] . '" method="post">
                               <input type="hidden" name="repository" value="' . $options['returnUrl'] . '" />
-                              <input type="submit" value="' . $options['submitValue'] . '" class="btn btn-danger"/>
+                              <input type="submit" value="' . $options['submitValue'] . '" class="btn ' .
+                              $options['submitBtnClass'] . '"/>
                           </form>
                       </div>
                       <div style="clear: both;"></div>

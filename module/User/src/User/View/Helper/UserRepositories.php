@@ -63,7 +63,7 @@ class UserRepositories extends ListModules implements ServiceManagerAwareInterfa
         }
 
         return $repositories;
-    }    
+    }
 
     protected function sortModules($unsorted, $sm)
     {
